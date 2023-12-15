@@ -108,3 +108,18 @@ class DataVisualization:
             plt.xlabel(feature)
             plt.xticks(rotation=45)
             plt.show()
+
+    def plot_selected_features_correlation(self, feature_list):
+        plt.figure(figsize=(10, 8))
+        sns.heatmap(self.data[feature_list].corr(), annot=True, fmt='.2f', cmap='coolwarm')
+        plt.title('Correlation Matrix for Selected Features')
+        plt.show()
+
+    def plot_selected_features_heatmap(self, feature_list):
+        plt.figure(figsize=(10, 8))
+        numeric_data = self.data[feature_list].select_dtypes(include=[np.number])
+        correlation_matrix = numeric_data.corr()
+        sns.heatmap(correlation_matrix[['revenue']].sort_values(by='revenue', ascending=False),
+                    annot=True, cmap='coolwarm', center=0)
+        plt.title('Correlation of New Features with Revenue')
+        plt.show()

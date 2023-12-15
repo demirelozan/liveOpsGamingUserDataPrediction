@@ -12,6 +12,14 @@ def generate_plots(data, include_new_features=False):
         # Visualize relationships of new features with revenue
         visualizer.plot_new_feature_relationships(new_features)
 
+        # Adding Revenue to New Features to add to the following plots.
+        new_features.append('revenue')
+        # Generate correlation matrix for new features
+        visualizer.plot_selected_features_correlation(new_features)
+
+        # Generate Heatmap for new features
+        visualizer.plot_selected_features_heatmap(new_features)
+
     else:
 
         # Continuous Variables are used to create scatter plots against revenue.
