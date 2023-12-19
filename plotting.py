@@ -7,7 +7,7 @@ def generate_plots(data, include_new_features=False):
     if include_new_features:
         # List of new features to plot against revenue
         new_features = ['LevelsPerSession', 'InteractivityPerSession', 'AvgGameplayDurationPerSession',
-                        'WeightedAdInteraction', 'AdInteractionPerSession']
+                        'WeightedAdInteraction', 'AdInteractionPerSession', 'PositiveGameplay', 'Penalty', 'GameEfficiencyRate', 'PenaltyInteractivity']
 
         # Visualize relationships of new features with revenue
         visualizer.plot_new_feature_relationships(new_features)
