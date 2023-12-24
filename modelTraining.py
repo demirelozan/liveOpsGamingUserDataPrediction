@@ -1,6 +1,5 @@
 import pandas as pd
 from sklearn.model_selection import train_test_split
-from sklearn.ensemble import RandomForestClassifier
 from sklearn.linear_model import LinearRegression
 from sklearn.tree import DecisionTreeRegressor
 from sklearn.ensemble import RandomForestRegressor
@@ -9,15 +8,21 @@ from sklearn.preprocessing import OneHotEncoder
 from sklearn.compose import ColumnTransformer
 from sklearn.metrics import mean_squared_error, mean_absolute_error, r2_score
 import numpy as np
+import logging
+
+logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
 
 class ModelTraining:
     def __init__(self, data):
+        self.X_test_reduced = None
+        self.X_train_reduced = None
         self.preprocessor = None
         self.data = data
         self.X_train, self.X_test, self.y_train, self.y_test = None, None, None, None
 
     def preprocess_data(self):
+        logging.info("Starting data preprocessing.")
         X = self.data.drop('revenue', axis=1)
         y = self.data['revenue']
 
@@ -42,37 +47,45 @@ class ModelTraining:
 
             # Get feature names
             feature_names = self.preprocessor.get_feature_names_out()
-            selected_features = [feature for feature, importance in zip(feature_names, importances) if
-                                 importance >= threshold]
+            selected_feature_indices = [i for i, imp in enumerate(model.feature_importances_) if imp >= threshold]
 
             # Filter the data
-            self.X_train = self.X_train[:, model.feature_importances_ >= threshold]
-            self.X_test = self.X_test[:, model.feature_importances_ >= threshold]
+            self.X_train_reduced = self.X_train[:, selected_feature_indices]
+            self.X_test_reduced = self.X_test[:, selected_feature_indices]
 
+            selected_features = [feature_names[i] for i in selected_feature_indices]
             print("Selected features based on importance:", selected_features)
-            return self.X_train, self.X_test, selected_features
+            return self.X_train_reduced, self.X_test_reduced, selected_features
         else:
             print("Feature importance not available for this model type.")
             return self.X_train, self.X_test, []
 
     def train_linear_regression(self):
+        logging.info("Training Linear Regression model.")
         model = LinearRegression()
-        model.fit(self.X_train, self.y_train)
+        X_train_to_use = self.X_train_reduced if self.X_train_reduced is not None else self.X_train
+        model.fit(X_train_to_use, self.y_train)
         return model
 
     def train_decision_tree(self):
+        logging.info("Training Decision Tree model.")
         model = DecisionTreeRegressor(random_state=42)
-        model.fit(self.X_train, self.y_train)
+        X_train_to_use = self.X_train_reduced if self.X_train_reduced is not None else self.X_train
+        model.fit(X_train_to_use, self.y_train)
         return model
 
     def train_random_forest(self):
+        logging.info("Training Random Forest model.")
         model = RandomForestRegressor(random_state=42)
-        model.fit(self.X_train, self.y_train)
+        X_train_to_use = self.X_train_reduced if self.X_train_reduced is not None else self.X_train
+        model.fit(X_train_to_use, self.y_train)
         return model
 
     def train_xgboost(self):
+        logging.info("Training XGBoost model.")
         model = XGBRegressor(random_state=42)
-        model.fit(self.X_train, self.y_train)
+        X_train_to_use = self.X_train_reduced if self.X_train_reduced is not None else self.X_train
+        model.fit(X_train_to_use, self.y_train)
         return model
 
     def get_feature_importance(self, model):
