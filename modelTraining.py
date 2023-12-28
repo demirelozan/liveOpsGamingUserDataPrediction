@@ -41,6 +41,16 @@ class ModelTraining:
         self.X_train, self.X_test, self.y_train, self.y_test = train_test_split(X_processed, y, test_size=0.20,
                                                                                 random_state=42)
 
+    def detect_outliers(self, feature):
+        Q1 = self.data[feature].quantile(0.25)
+        Q3 = self.data[feature].quantile(0.75)
+        IQR = Q3 - Q1
+        outlier_thresholds = (Q1 - 1.5 * IQR, Q3 + 1.5 * IQR)
+
+        outliers = self.data[(self.data[feature] < outlier_thresholds[0]) |
+                             (self.data[feature] > outlier_thresholds[1])]
+        return outliers
+
     def feature_selection_based_on_importance(self, model, threshold=0.01):
         if hasattr(model, 'feature_importances_'):
             importances = model.feature_importances_
