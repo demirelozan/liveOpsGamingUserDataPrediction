@@ -8,6 +8,7 @@ from sklearn.ensemble import GradientBoostingRegressor
 from sklearn.preprocessing import OneHotEncoder
 from sklearn.compose import ColumnTransformer
 from sklearn.metrics import mean_squared_error, mean_absolute_error, r2_score
+from sklearn.model_selection import cross_val_score
 import numpy as np
 import logging
 
@@ -41,6 +42,16 @@ class ModelTraining:
         # Split the data
         self.X_train, self.X_test, self.y_train, self.y_test = train_test_split(X_processed, y, test_size=0.20,
                                                                                 random_state=42)
+
+    def perform_cross_validation(self, model, cv_folds=5):
+        mse_scores = cross_val_score(model, self.X_train, self.y_train, scoring='neg_mean_squared_error', cv=cv_folds)
+        r2_scores = cross_val_score(model, self.X_train, self.y_train, scoring='r2', cv=cv_folds)
+
+        rmse_scores = np.sqrt(-mse_scores)
+        avg_rmse = np.mean(rmse_scores)
+        avg_r2 = np.mean(r2_scores)
+
+        return {'Average RMSE': avg_rmse, 'Average R^2': avg_r2}
 
     def feature_selection_based_on_importance(self, model, threshold=0.01):
         if hasattr(model, 'feature_importances_'):

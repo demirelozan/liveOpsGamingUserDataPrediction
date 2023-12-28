@@ -28,7 +28,7 @@ def main():
 
     model_trainer = ModelTraining(data_with_features)
     model_trainer.preprocess_data()
-    #    model_trainer.split_data()
+
 
     # Train various models
     lr_model = model_trainer.train_linear_regression()
@@ -38,6 +38,11 @@ def main():
     gbm_model = model_trainer.train_gradient_boosting()
 
     lr_metrics = model_trainer.evaluate_model(lr_model)
+
+    # Perform cross-validation to evaluate the baseline performance of the models
+    print("Performing Cross Validation!")
+    cv_results_gbm = model_trainer.perform_cross_validation(gbm_model, cv_folds=5)
+    print(f"Cross-Validation Results for GBM: {cv_results_gbm}")
 
     dt_feature_importance = model_trainer.get_feature_importance(dt_model)
     print("Decision Tree Feature Importance:\n", dt_feature_importance)
