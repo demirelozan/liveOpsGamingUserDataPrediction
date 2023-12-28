@@ -4,6 +4,7 @@ from sklearn.linear_model import LinearRegression
 from sklearn.tree import DecisionTreeRegressor
 from sklearn.ensemble import RandomForestRegressor
 from xgboost import XGBRegressor
+from sklearn.ensemble import GradientBoostingRegressor
 from sklearn.preprocessing import OneHotEncoder
 from sklearn.compose import ColumnTransformer
 from sklearn.metrics import mean_squared_error, mean_absolute_error, r2_score
@@ -40,16 +41,6 @@ class ModelTraining:
         # Split the data
         self.X_train, self.X_test, self.y_train, self.y_test = train_test_split(X_processed, y, test_size=0.20,
                                                                                 random_state=42)
-
-    def detect_outliers(self, feature):
-        Q1 = self.data[feature].quantile(0.25)
-        Q3 = self.data[feature].quantile(0.75)
-        IQR = Q3 - Q1
-        outlier_thresholds = (Q1 - 1.5 * IQR, Q3 + 1.5 * IQR)
-
-        outliers = self.data[(self.data[feature] < outlier_thresholds[0]) |
-                             (self.data[feature] > outlier_thresholds[1])]
-        return outliers
 
     def feature_selection_based_on_importance(self, model, threshold=0.01):
         if hasattr(model, 'feature_importances_'):
@@ -94,6 +85,12 @@ class ModelTraining:
     def train_xgboost(self):
         logging.info("Training XGBoost model.")
         model = XGBRegressor(random_state=42)
+        X_train_to_use = self.X_train_reduced if self.X_train_reduced is not None else self.X_train
+        model.fit(X_train_to_use, self.y_train)
+        return model
+
+    def train_gradient_boosting(self):
+        model = GradientBoostingRegressor(random_state=42)
         X_train_to_use = self.X_train_reduced if self.X_train_reduced is not None else self.X_train
         model.fit(X_train_to_use, self.y_train)
         return model
