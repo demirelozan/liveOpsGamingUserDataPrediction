@@ -1,7 +1,9 @@
+from plotting import generate_plots
+from dataPreProcessing import DataPreProcessing
+from dataProcessing import DataProcessing
 from featureEngineering import FeatureEngineering
 from modelTraining import ModelTraining
 import pandas as pd
-from plotting import generate_plots
 
 
 def main():
@@ -9,16 +11,18 @@ def main():
                    "Projects\\liveOpsGamingUserDataPrediction\\ml_project_2023_cltv_train.xlsx"
     original_data = pd.read_excel(fileLocation, engine='openpyxl')
 
-    # Create a copy of the data for feature engineering
-    data_with_features = original_data.copy()
-
     #    generate_plots(original_data, include_new_features=False)
-
+    data_preprocessor = DataPreProcessing(original_data)
+    preprocessed_data = data_preprocessor.preprocess_data()
+    '''
+    data_processor = DataProcessing(preprocessed_data)
+    processed_data = data_processor.execute_all()
+    '''
     # Weight values are gathered from Correlation to Revenue
     weights = {'banner_cnt': 0.75, 'is_cnt': 0.61, 'rv_cnt': 0.69}
 
     # Apply feature engineering
-    feature_engineer = FeatureEngineering(data_with_features)
+    feature_engineer = FeatureEngineering(preprocessed_data)
     data_with_features = feature_engineer.execute_all(weights)  # Add weights as needed
 
     # Generate plots for data with new features
@@ -27,8 +31,7 @@ def main():
     print(list(data_with_features.columns))
 
     model_trainer = ModelTraining(data_with_features)
-    model_trainer.preprocess_data()
-
+    model_trainer.split_data()
 
     # Train various models
     lr_model = model_trainer.train_linear_regression()

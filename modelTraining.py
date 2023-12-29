@@ -16,32 +16,36 @@ logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(
 
 
 class ModelTraining:
-    def __init__(self, data):
+    def __init__(self, data, target_column='revenue'):
         self.X_test_reduced = None
         self.X_train_reduced = None
         self.preprocessor = None
         self.data = data
+        self.target_column = target_column
         self.X_train, self.X_test, self.y_train, self.y_test = None, None, None, None
 
-    def preprocess_data(self):
-        logging.info("Starting data preprocessing.")
-        X = self.data.drop('revenue', axis=1)
-        y = self.data['revenue']
+    def separate_features_and_target(self):
+        X = self.data.drop(self.target_column, axis=1)
+        y = self.data[self.target_column]
+        return X, y
 
-        # Identify categorical columns
-        categorical_cols = X.select_dtypes(include=['object', 'category']).columns
+    def apply_one_hot_encoding(self, X, categorical_cols=None):
+        if categorical_cols is None:
+            categorical_cols = X.select_dtypes(include=['object', 'category']).columns
 
-        # Apply one-hot encoding
         self.preprocessor = ColumnTransformer(
             transformers=[
                 ('onehot', OneHotEncoder(handle_unknown='ignore'), categorical_cols)
             ], remainder='passthrough')
 
-        X_processed = self.preprocessor.fit_transform(X)
+        return self.preprocessor.fit_transform(X)
 
-        # Split the data
-        self.X_train, self.X_test, self.y_train, self.y_test = train_test_split(X_processed, y, test_size=0.20,
-                                                                                random_state=42)
+    def split_data(self, test_size=0.20, random_state=42):
+        X, y = self.separate_features_and_target()
+        X_processed = self.apply_one_hot_encoding(X)
+
+        self.X_train, self.X_test, self.y_train, self.y_test = train_test_split(
+            X_processed, y, test_size=test_size, random_state=random_state)
 
     def perform_cross_validation(self, model, cv_folds=5):
         mse_scores = cross_val_score(model, self.X_train, self.y_train, scoring='neg_mean_squared_error', cv=cv_folds)
