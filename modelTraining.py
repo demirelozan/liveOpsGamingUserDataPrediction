@@ -61,7 +61,6 @@ class ModelTraining:
         if hasattr(model, 'feature_importances_'):
             importances = model.feature_importances_
 
-            # Get feature names
             feature_names = self.preprocessor.get_feature_names_out()
             selected_feature_indices = [i for i, imp in enumerate(model.feature_importances_) if imp >= threshold]
 
@@ -105,6 +104,7 @@ class ModelTraining:
         return model
 
     def train_gradient_boosting(self):
+        logging.info("Training Gradient Boost Model.")
         model = GradientBoostingRegressor(random_state=42)
         X_train_to_use = self.X_train_reduced if self.X_train_reduced is not None else self.X_train
         model.fit(X_train_to_use, self.y_train)
@@ -123,7 +123,7 @@ class ModelTraining:
     def evaluate_model(self, model):
         predictions = model.predict(self.X_test)
 
-        # Regression metrics
+        # Performance Evaluation Metrics
         mse = mean_squared_error(self.y_test, predictions)
         mae = mean_absolute_error(self.y_test, predictions)
         rmse = np.sqrt(mse)
