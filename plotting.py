@@ -41,11 +41,4 @@ def generate_plots(data, include_new_features=False):
         visualizer.plot_scatter('session_cnt', 'User Segmentation based on Session Count and Gameplay Duration',
                                 figsize=(10, 6))
 
-        # Plot the correlation matrix
         visualizer.plot_correlation_matrix()
-
-        # Plot pairwise relationships for selected variables
-    #    visualizer.plot_pairplot(['session_cnt', 'gameplay_duration', 'max_lvl_no', 'banner_cnt'], figsize=(15, 15))
-
-    # Plot a relationship between two categorical variables
-    #    visualizer.plot_categorical_relationship('os', 'device_brand')
