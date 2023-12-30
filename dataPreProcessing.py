@@ -8,6 +8,11 @@ from sklearn.pipeline import Pipeline
 class DataPreProcessing:
     def __init__(self, data):
         self.data = data
+        del self.data["country"]
+        del self.data["lang"]
+        del self.data["_id"]
+        print(list(self.data.head()))
+        self.original_dtypes = data.dtypes # Storing the original data types to send dataProcessing
 
     def preprocess_data(self):
         print("Original column types:", self.data.dtypes.value_counts())
