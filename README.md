@@ -101,11 +101,17 @@ For Feature Selection, every model is used separately. This is done by running t
 
 Using the Decision Tree model and its Feature Importances for Feature Selection gave the best result in terms of accuracy.
 Here are the top 5 features selected by this method:
+
 Decision Tree Feature Importance:
+
 •	remainder__WeightedAdInteraction         0.480798
+
 •	remainder__repeat_cnt                    0.187149
+
 •	remainder__hint3_cnt                     0.074884
+
 •	remainder__country_SE                    0.045578
+
 •	remainder__rv_cnt                        0.035662
 
 **WeightedAdInteraction** performed the best in all 25 models, meaning it has a strong relation with Revenue Generation/ Prediction. This is a feature that was added with Feature Engineering.
@@ -115,6 +121,7 @@ Decision Tree Feature Importance:
 Since this is the goal of this entire training it is important to keep the model from the training data and apply it on this test set.
 For this, a specific Python Library is used, which is joblib.
 **Joblib** is used for two stages:
+
 **1.**	To save the selected features of the training model.
 
 **a.**	Since we select the features after the first phase of running the model on training method and using ML models for feature importance and then using the features that gives the best response on the second training, we have to save them after the first iteration of while compiling. This is done by joblib.dump(). The selected features are saved as ‘selected_features.pkl’
