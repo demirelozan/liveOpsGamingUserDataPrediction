@@ -48,3 +48,20 @@ Below are some of the important figures that I have came across throughout this 
 
 ### Figure 4: Correlation Matrix for All Variables
 ![Figure 4: Correlation Matrix for All Variables.](https://github.com/demirelozan/liveOpsGamingUserDataPrediction/blob/main/gamingUserDataFigures/Correlation%20Matrix%20for%20All%20Variables.png?raw=true)
+
+## Feature Engineering Using the Importances
+The Exploratory Data Analysis (EDA) is used to help create new features, which is used to create better relationships to revenue and perform better accuracy in the training and test datasets. 
+
+Below are the features that are added by me with Feature Engineering:
+
+| Features Category  | Feature (Variable) | Feature Formulas |
+| ------------- | ------------- | ------------ |
+| `Session Engagement`  | LevelPerSession  | max_lvl_no / session_cnt |
+| `Session Engagement`  | InteractivityPerSession  | hint1_cnt + hint2_cnt + hint3_cnt + bonus_cnt + (repeat_cnt / session_cnt) |
+| `Session Engagement`  | AvgGameplayDurationPerSession  | gameplay_duration / session_cnt |
+| `Player Efficiency and Success`  | PositiveGameplay  | max_lvl_no + gameplay_duration + claim_gold_cnt |
+| `Player Efficiency and Success`  | Penalty  | hint1_cnt + hint2_cnt + hint3_cnt + bonus_cnt + repeat_cnt + (bonus_cnt / session_cnt) |
+| `Player Efficiency and Success`  | PenaltyInteractivity  |hint1_cnt + hint2_cnt + hint3_cnt + bonus_cnt + repeat_cnt + bonus_cnt |
+| `Player Efficiency and Success`  | GameEfficiencyRate  | PositiveGameplay - Penalty |
+| `Ad Interaction Features`  | WeightedAdInteraction (Used the weights from Figure 3) | Banner_cnt * banner_weight + is_cnt * is_weight + rv_cnt * rv_weight |
+| `Ad Interaction Features`  | AdInteractionPerSession | (banner_cnt + is_cnt + rv_cnt) /session_cnt |
