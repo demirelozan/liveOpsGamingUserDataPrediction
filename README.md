@@ -73,19 +73,23 @@ While Correlations do not directly showcase the importance of the variables will
 
 ## Application of the Models
 The Machine Learning models that are used in this project are:
-• **Linear Regression:** a simple but effective method. Many of the correlations found between features and revenue are relatively linear like the graphs shown in figure 2. For example, in the graph of "Revenue vs banner_cnt", watching more banner ads increases revenue generated fairly linearly. With multiple features, this is called multiple linear regression, and the model has an equation as shown below:
-•	**Decision Tree:** the method produces a tree with branches where the data is partitioned and the response value for each datapoint is determined based on the range of values the data fits in, while minimizing RSS. However, with many features it becomes too complicated to comprehend decision tree graphs. 
-•	**Random Forest:** this method builds multiple decision trees and combines their predictions and is more suitable for datasets with many features. This enhances accuracy and mitigates overfitting, and can help show relationships among various features.
-•	**Gradient Boosting:** this is one of the best methods on tabular datasets for classification and regression predictive models. It uses trees but minimizes prediction error but iteratively building a model. This makes sense for the provided problem since many players will have similar gaming habits, so classification combined with regression is effective.
-•	**XGBoost:** this last method is very similar to gradient boosting with many optimization methods. It is expected that this model will do the best since it is similar to Gradient Boosting, but is better optimized.
+• **Linear Regression:** a simple but effective method. Many of the correlations found between features and revenue are relatively linear like the graphs shown in figure 2. For example, in the graph of "Revenue vs banner_cnt", watching more banner ads increases revenue generated fairly linearly. With multiple features, this is called multiple linear regression, and the model has an equation as shown 
+below:
+**• Decision Tree:** the method produces a tree with branches where the data is partitioned and the response value for each datapoint is determined based on the range of values the data fits in, while minimizing RSS. However, with many features it becomes too complicated to comprehend decision tree graphs. 
+**•	Random Forest:** this method builds multiple decision trees and combines their predictions and is more suitable for datasets with many features. This enhances accuracy and mitigates overfitting, and can help show relationships among various features.
+**• Gradient Boosting:** this is one of the best methods on tabular datasets for classification and regression predictive models. It uses trees but minimizes prediction error but iteratively building a model. This makes sense for the provided problem since many players will have similar gaming habits, so classification combined with regression is effective.
+**•	XGBoost:** this last method is very similar to gradient boosting with many optimization methods. It is expected that this model will do the best since it is similar to Gradient Boosting, but is better optimized.
 
 In order to further enhance the models, feature importance was tracked for each method application. This identifies which features are most useful for each method, might hint at which features work better for which model and might explain why a model would be successful.
 
 ### Validation Techniques
 In order to be able to assess the models, using the training dataset which includes revenue, the data was split for the training: with 80% of the data being used to train each model, and 20% used to test.
 In order to assess models, cross validation which calculates the average Root Mean Squared Error (RMSE), and average R-squared, are used, where:
+
 ![image](https://github.com/demirelozan/liveOpsGamingUserDataPrediction/assets/57192515/33756886-a74e-4325-b484-2ea1c5a4e578)
+
 ![image](https://github.com/demirelozan/liveOpsGamingUserDataPrediction/assets/57192515/1be740a5-beda-41c2-a5b2-46d3523d69cf)
+
 Cross validation was performed using 5 folds, meaning the data is split into 5 and the model is trained and evaluated 5 times, which gives a more robust estimate of how successful each model is. 
 
 
