@@ -1,6 +1,8 @@
 # Revenue Prediction in a Successful Mobile Puzzle Game (Live Operations)
 The user data used in this project is from a successful puzzle game of a gaming studio based in Istanbul, Turkey.
 
+For **data privacy policies**, the dataset has not been added.
+
 The aim of this project is to train a Machine Learning model using the available user data and their behavior while also considering their generated 'revenue', which is the target output of the model. This data is of a successful crossword puzzle from the Google Play Store and AppStore, and it involves both their first 24 hours of gameplay behavior and all time behavior. There are 23 predictors in the available dataset of the users and the response variable is revenue. After the model is trained, it is used to predict the approximate revenue generation of future players and their demographics, so that the marketing, ad strategy and in game monetization can aim the best possible scenario in terms of revenue generation.
 
 
