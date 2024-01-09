@@ -96,4 +96,32 @@ In order to assess models, cross validation which calculates the average Root Me
 
 Cross validation was performed using 5 folds, meaning the data is split into 5 and the model is trained and evaluated 5 times, which gives a more robust estimate of how successful each model is. 
 
+## Feature Selection
+For Feature Selection, every model is used separately. This is done by running the model multiple times, for each iteration using the Feature Importance of a different model out of the models that we use. So 5 different Feature Selection scenario was performed and the models were ran a total of 25 times (besides the code changes, iterations etc, solely for feature selection). Out of these 25 performances, the best performing features were found as:
 
+Using the Decision Tree model and its Feature Importances for Feature Selection gave the best result in terms of accuracy.
+Here are the top 5 features selected by this method:
+Decision Tree Feature Importance:
+•	remainder__WeightedAdInteraction         0.480798
+•	remainder__repeat_cnt                    0.187149
+•	remainder__hint3_cnt                     0.074884
+•	remainder__country_SE                    0.045578
+•	remainder__rv_cnt                        0.035662
+
+**WeightedAdInteraction** performed the best in all 25 models, meaning it has a strong relation with Revenue Generation/ Prediction. This is a feature that was added with Feature Engineering.
+
+
+## Test Data Revenue Prediction
+Since this is the goal of this entire training it is important to keep the model from the training data and apply it on this test set.
+For this, a specific Python Library is used, which is joblib.
+**Joblib** is used for two stages:
+**1.**	To save the selected features of the training model.
+
+**a.**	Since we select the features after the first phase of running the model on training method and using ML models for feature importance and then using the features that gives the best response on the second training, we have to save them after the first iteration of while compiling. This is done by joblib.dump(). The selected features are saved as ‘selected_features.pkl’
+
+**2.**	To save the best ML model that has been trained.
+
+**a.**	Since we are running 5 different ML models, we have to save the model that gives the best accuracy in regards to our metrics. After the second phase of training (after applying feature selection), we save the best ML model (which is GBM) with joblib.dump(). The selected model is saved as ‘gbm_model.pkl’.
+
+After these saves with the usage of Joblib, we load the test data in main.py and send everything (saved model path, test data path, selected features path) to “modelPredictor.py”, which deals solely with predicting revenue based on the trained model and the new data.
+After that in main.py, the results are saved as a new Excel document named “Predicted Output”.
