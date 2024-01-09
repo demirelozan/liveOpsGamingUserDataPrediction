@@ -4,7 +4,7 @@ The user data used in this project is from a successful puzzle game of a gaming 
 The aim of this project is to train a Machine Learning model using the available user data and their behavior while also considering their generated 'revenue', which is the target output of the model. This data is of a successful crossword puzzle from the Google Play Store and AppStore, and it involves both their first 24 hours of gameplay behavior and all time behavior. There are 23 predictors in the available dataset of the users and the response variable is revenue. After the model is trained, it is used to predict the approximate revenue generation of future players and their demographics, so that the marketing, ad strategy and in game monetization can aim the best possible scenario in terms of revenue generation.
 
 
-Table 1: List of all variables in the dataset, with similar variables grouped in the same category
+### Table 1: List of all variables in the dataset, with similar variables grouped in the same category
 | Category  | Variable | Variable Description |
 | ------------- | ------------- | ------------ |
 | `General User Info`  | Os  | Operating system of the user's mobile phone |
@@ -53,7 +53,7 @@ Below are some of the important figures that I have came across throughout this 
 The Exploratory Data Analysis (EDA) is used to help create new features, which is used to create better relationships to revenue and perform better accuracy in the training and test datasets. 
 
 Below are the features that are added by me with Feature Engineering:
-
+### Table 2: List of New Features created by category, along with how it is calculated
 | Features Category  | Feature (Variable) | Feature Formulas |
 | ------------- | ------------- | ------------ |
 | `Session Engagement`  | LevelPerSession  | max_lvl_no / session_cnt |
