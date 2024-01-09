@@ -75,9 +75,13 @@ While Correlations do not directly showcase the importance of the variables will
 The Machine Learning models that are used in this project are:
 • **Linear Regression:** a simple but effective method. Many of the correlations found between features and revenue are relatively linear like the graphs shown in figure 2. For example, in the graph of "Revenue vs banner_cnt", watching more banner ads increases revenue generated fairly linearly. With multiple features, this is called multiple linear regression, and the model has an equation as shown 
 below:
+
 **• Decision Tree:** the method produces a tree with branches where the data is partitioned and the response value for each datapoint is determined based on the range of values the data fits in, while minimizing RSS. However, with many features it becomes too complicated to comprehend decision tree graphs. 
+
 **•	Random Forest:** this method builds multiple decision trees and combines their predictions and is more suitable for datasets with many features. This enhances accuracy and mitigates overfitting, and can help show relationships among various features.
+
 **• Gradient Boosting:** this is one of the best methods on tabular datasets for classification and regression predictive models. It uses trees but minimizes prediction error but iteratively building a model. This makes sense for the provided problem since many players will have similar gaming habits, so classification combined with regression is effective.
+
 **•	XGBoost:** this last method is very similar to gradient boosting with many optimization methods. It is expected that this model will do the best since it is similar to Gradient Boosting, but is better optimized.
 
 In order to further enhance the models, feature importance was tracked for each method application. This identifies which features are most useful for each method, might hint at which features work better for which model and might explain why a model would be successful.
