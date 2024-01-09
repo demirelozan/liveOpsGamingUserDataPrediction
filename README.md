@@ -65,3 +65,9 @@ Below are the features that are added by me with Feature Engineering:
 | `Player Efficiency and Success`  | GameEfficiencyRate  | PositiveGameplay - Penalty |
 | `Ad Interaction Features`  | WeightedAdInteraction (Used the weights from Figure 3) | Banner_cnt * banner_weight + is_cnt * is_weight + rv_cnt * rv_weight |
 | `Ad Interaction Features`  | AdInteractionPerSession | (banner_cnt + is_cnt + rv_cnt) /session_cnt |
+
+While Correlations do not directly showcase the importance of the variables will be doing inside the model training, just to see the relations, another Correlation with Revenue has been performed with these new features specifically.
+
+### Figure 5: Correlation of New Features with Revenue
+![Figure 5: Correlation of New Features with Revenue.](https://github.com/demirelozan/liveOpsGamingUserDataPrediction/blob/main/gamingUserDataFigures/Correlation%20of%20New%20Features%20with%20Revenue%20v2.png?raw=true)
+
