@@ -32,3 +32,10 @@ Table 1: List of all variables in the dataset, with similar variables grouped in
 | `Ads` | Is_cnt | Number of interstitial-type ads the user watched in the first 24 hours |
 | `Ads` | Rv_cnt | Number of banner-type ads the user watched in the first 24 hours |
 | `Revenue` | Rev | Target column. Indicates the users first 24 hours revenue |
+
+## Data Visualization
+To understand the user data and how they affect each other and revenue, first data is visualized through different methods like scatterplots, boxplots, heatmaps etc.
+
+Below are some of the important figures that I have came across throughout this process.
+![Figure 1: Average Revenue vs Country in Bar Graph.]((https://github.com/demirelozan/liveOpsGamingUserDataPrediction/blob/main/gamingUserDataFigures/Average%20Revenue%20by%20country.png?raw=true))
+
