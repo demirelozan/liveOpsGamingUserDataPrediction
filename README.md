@@ -40,3 +40,11 @@ Below are some of the important figures that I have came across throughout this 
 ### Figure 1: Average Revenue vs Country in Bar Graph
 ![Figure 1: Average Revenue vs Country in Bar Graph.](https://github.com/demirelozan/liveOpsGamingUserDataPrediction/blob/main/gamingUserDataFigures/Average%20Revenue%20by%20country.png)
 
+### Figure 2: Numerical Variables Relations with Each Other for Outlier Detection
+![Figure 2: Numerical Variables Relations with Each Other for Outlier Detection.](https://github.com/demirelozan/liveOpsGamingUserDataPrediction/blob/main/gamingUserDataFigures/Figure_1%20Updated%20v3.png?raw=true)
+
+### Figure 3: Correlation of Features with Revenue in Heatmap
+![Figure 3: Correlation of Features with Revenue in Heatmap.](https://github.com/demirelozan/liveOpsGamingUserDataPrediction/blob/main/gamingUserDataFigures/Correlation%20of%20Features%20with%20Revenue.png?raw=true)
+
+### Figure 4: Correlation Matrix for All Variables
+![Figure 4: Correlation Matrix for All Variables.](https://github.com/demirelozan/liveOpsGamingUserDataPrediction/blob/main/gamingUserDataFigures/Correlation%20Matrix%20for%20All%20Variables.png?raw=true)
