@@ -1,4 +1,4 @@
-**Revenue Prediction in Gaming Industry**
+# Revenue Prediction in Gaming Industry
 The data used in this project is from a successful puzzle game of a gaming studio based in Istanbul, Turkey.
 
 | Category  | Variable | Variable Description |
