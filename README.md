@@ -1,5 +1,5 @@
 # Revenue Prediction in Gaming Industry
-The data used in this project is from a successful puzzle game of a gaming studio based in Istanbul, Turkey.
+The user data used in this project is from a successful puzzle game of a gaming studio based in Istanbul, Turkey.
 
 The aim of this project is to train a Machine Learning model using the available user data and their behavior while also considering their generated 'revenue', which is the target output of the model. This data is of a successful crossword puzzle from the Google Play Store and AppStore, and it involves both their first 24 hours of gameplay behavior and all time behavior. There are 23 predictors in the available dataset of the users and the response variable is revenue. After the model is trained, it is used to predict the approximate revenue generation of future players and their demographics, so that the marketing, ad strategy and in game monetization can aim the best possible scenario in terms of revenue generation.
 
@@ -27,3 +27,8 @@ Table 1: List of all variables in the dataset, with similar variables grouped in
 | `Help` | Hint1_cnt | Sum of the type 1 hint count which the user used while playing the game |
 | `Help` | Hint2_cnt | Sum of the type 2 hint count which the user used while playing the game |
 | `Help` | Hint3_cnt | Sum of the type 3 hint count which the user used while playing the game |
+| `Help` | Repeat_cnt | Sum of the type 3 hint count which the user used while playing the game |
+| `Ads` | Banner_cnt | Number of banner-type ads the user watched in the first 24 hours |
+| `Ads` | Is_cnt | Number of interstitial-type ads the user watched in the first 24 hours |
+| `Ads` | Rv_cnt | Number of banner-type ads the user watched in the first 24 hours |
+| `Revenue` | Rev | Target column. Indicates the users first 24 hours revenue |
